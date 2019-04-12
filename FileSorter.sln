@@ -3,9 +3,57 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.271
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileSorterLib", "FileSorterLib\FileSorterLib.csproj", "{1CD58C5A-F3E5-4A58-A60C-1DC5040C6592}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileSorterWPF", "FileSorterWPF\FileSorterWPF.csproj", "{D44DAF48-F73B-4DFE-853A-88775F5D2CC6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{EDEDC6A1-AFFA-4047-A409-19F0B3EF4084}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileSorterLibTests", "FileSorterLibTests\FileSorterLibTests.csproj", "{331C1F2E-9847-422B-9E67-B44028FAB3DF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileSorterStorageTests", "FileSorterStorageTests\FileSorterStorageTests.csproj", "{5929B0F6-6102-43C1-B6BD-D71A8E631D2D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FileSorterStorageLib", "FileSorterStorageLib\FileSorterStorageLib.csproj", "{F9F21EE9-9846-4E0A-B86A-83FBD7106426}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestApp", "TestApp\TestApp.csproj", "{9606C81B-E71A-42D3-84A6-3C0EFDBFCB64}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1CD58C5A-F3E5-4A58-A60C-1DC5040C6592}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1CD58C5A-F3E5-4A58-A60C-1DC5040C6592}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1CD58C5A-F3E5-4A58-A60C-1DC5040C6592}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1CD58C5A-F3E5-4A58-A60C-1DC5040C6592}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D44DAF48-F73B-4DFE-853A-88775F5D2CC6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D44DAF48-F73B-4DFE-853A-88775F5D2CC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D44DAF48-F73B-4DFE-853A-88775F5D2CC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D44DAF48-F73B-4DFE-853A-88775F5D2CC6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{331C1F2E-9847-422B-9E67-B44028FAB3DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{331C1F2E-9847-422B-9E67-B44028FAB3DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{331C1F2E-9847-422B-9E67-B44028FAB3DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{331C1F2E-9847-422B-9E67-B44028FAB3DF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5929B0F6-6102-43C1-B6BD-D71A8E631D2D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5929B0F6-6102-43C1-B6BD-D71A8E631D2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5929B0F6-6102-43C1-B6BD-D71A8E631D2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5929B0F6-6102-43C1-B6BD-D71A8E631D2D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F9F21EE9-9846-4E0A-B86A-83FBD7106426}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F9F21EE9-9846-4E0A-B86A-83FBD7106426}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F9F21EE9-9846-4E0A-B86A-83FBD7106426}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F9F21EE9-9846-4E0A-B86A-83FBD7106426}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9606C81B-E71A-42D3-84A6-3C0EFDBFCB64}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9606C81B-E71A-42D3-84A6-3C0EFDBFCB64}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9606C81B-E71A-42D3-84A6-3C0EFDBFCB64}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9606C81B-E71A-42D3-84A6-3C0EFDBFCB64}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{331C1F2E-9847-422B-9E67-B44028FAB3DF} = {EDEDC6A1-AFFA-4047-A409-19F0B3EF4084}
+		{5929B0F6-6102-43C1-B6BD-D71A8E631D2D} = {EDEDC6A1-AFFA-4047-A409-19F0B3EF4084}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {FB777FF8-FCA2-40B4-8172-627CE1C31C1E}

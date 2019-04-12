@@ -10,6 +10,7 @@ namespace FileSorterStorageLib.Models
         public string Extension { get; set; }
         public string Name { get; set; }
         public DateTime FirstFound { get; set; }
+        public DateTime LastSeen { get; set; }
         public List<FileMovement> Movements { get; set; }
         public string CurrentLocation { get; set; }
 

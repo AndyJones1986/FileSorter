@@ -39,6 +39,7 @@ namespace FileSorterStorageLib
 
         public void UpdateFile(Models.FileData file)
         {
+            file.LastSeen = DateTime.Now;
             _files.Update(file);
         }
 

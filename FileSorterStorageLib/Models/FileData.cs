@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-
+using System.IO;
 namespace FileSorterStorageLib.Models
 {
     public class FileData
@@ -13,11 +13,15 @@ namespace FileSorterStorageLib.Models
         public DateTime LastSeen { get; set; }
         public List<FileMovement> Movements { get; set; }
         public string CurrentLocation { get; set; }
-
         public int Hash { get; set; }
         public FileData()
         {
 
+        }
+
+        public FileInfo GetInfo()
+        {
+            return new FileInfo(CurrentLocation);
         }
 
         public FileData(System.IO.FileInfo info)

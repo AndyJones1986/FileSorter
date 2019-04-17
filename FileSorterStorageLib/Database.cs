@@ -1,6 +1,7 @@
 ﻿using System;
 using LiteDB;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace FileSorterStorageLib
@@ -9,7 +10,7 @@ namespace FileSorterStorageLib
     {
         private LiteDatabase _db { get; set; }
         private LiteCollection<Models.FileData> _files { get { return _db.GetCollection<Models.FileData>("Files"); } }
-        private LiteCollection<Models.Configuration> _config { get { return _db.GetCollection<Models.Configuration>("Config"); } }
+        private LiteCollection<Models.FileGrouping> _groupingConfig { get { return _db.GetCollection<Models.FileGrouping>("Grouping"); } }
 
         public Database()
         {
@@ -43,14 +44,40 @@ namespace FileSorterStorageLib
             _files.Update(file);
         }
 
-        public IEnumerable<Models.Configuration> GetConfig()
+        public void InsertGrouping(string name, List<string> extensions)
         {
-            return _config.FindAll();
+            IEnumerable<Models.FileGrouping> existingGroups = GetGroupingConfig(name);
+            if (existingGroups.Count() > 0)
+            {
+                foreach (var group in existingGroups)
+                {
+                    group.Extensions.AddRange(extensions.Distinct().Where(ext => !group.Extensions.Contains(ext)));
+                    UpdateGrouping(group);
+                }
+            }
+            else
+            {
+                Models.FileGrouping group = new Models.FileGrouping();
+                group.Name = name;
+                group.Extensions.AddRange(extensions);
+                _groupingConfig.Insert(group);
+            }
+
         }
 
-        public IEnumerable<Models.Configuration> GetConfig(Query predicate)
+        public void UpdateGrouping(Models.FileGrouping group)
         {
-            return _config.Find(predicate);
+            _groupingConfig.Update(group);
+        }
+
+        public IEnumerable<Models.FileGrouping> GetGroupingConfig()
+        {
+            return _groupingConfig.FindAll();
+        }
+
+        public IEnumerable<Models.FileGrouping> GetGroupingConfig(string name)
+        {
+            return _groupingConfig.Find(Query.EQ("Name", name));
         }
 
         #region IDisposable Support

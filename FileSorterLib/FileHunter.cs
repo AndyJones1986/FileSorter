@@ -11,29 +11,20 @@ using MoreLinq;
 
 namespace FileSorterLib
 {
-    public class FileHunter : IDisposable
+    public class FileHunter : DisposableDataLayerBase
     {
         private ConcurrentBag<FileData> _files { get; set; }
-        private Database _db { get; set; }
-
-        public FileHunter()
-        {
-            _db = new Database();
-        }
-
-        public IEnumerable<String> GetFilePaths()
+        
+        public IEnumerable<string> GetFilePaths()
         {
             return _db.GetFiles().Select(file => file.CurrentLocation);
         }
 
-        public void EmptyDB()
-        {
-            _db.ClearFiles();
-        }
-
         public void HuntFiles(string directoryPath)
         {
-            Directory.GetDirectories(directoryPath).ForEach(dir =>
+            var directories = Directory.GetDirectories(directoryPath).ToList();
+            directories.Add(directoryPath);
+            directories.ForEach(dir =>
             {
                 string[] files = Directory.GetFiles(dir, "*", SearchOption.AllDirectories);
                 var batches = files.Batch(50).ToList();
@@ -71,48 +62,11 @@ namespace FileSorterLib
                     }
                 });
             });
-
         }
-
 
         private FileInfo GetFileInfo(string path)
         {
             return new FileInfo(path);
         }
-
-        public void LoadAllFiles()
-        {
-            _db.GetFiles();
-        }
-
-        public void StoreFiles()
-        {
-
-        }
-
-        #region IDisposable Support
-        private bool disposedValue = false; // To detect redundant calls
-
-        protected virtual void Dispose(bool disposing)
-        {
-            if (!disposedValue)
-            {
-                if (disposing)
-                {
-                    _files = null;
-                    _db.Dispose();
-
-                }
-                disposedValue = true;
-            }
-        }
-
-        // This code added to correctly implement the disposable pattern.
-        public void Dispose()
-        {
-            Dispose(true);
-        }
-        #endregion
-
     }
 }

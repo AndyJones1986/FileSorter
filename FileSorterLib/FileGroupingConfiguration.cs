@@ -9,17 +9,17 @@ namespace FileSorterLib
     {
         public IEnumerable<FileSorterStorageLib.Models.FileGrouping> GetGroupings(string name)
         {
-            return _db.GetGroupingConfig(name);
+            return base._db.GetGroupingConfig(name);
         }
 
         public IEnumerable<FileSorterStorageLib.Models.FileGrouping> GetGroupings()
         {
-            return _db.GetGroupingConfig();
+            return base._db.GetGroupingConfig();
         }
 
         public void AddGrouping(string name, List<string> extensions)
         {
-            _db.InsertGrouping(name, extensions.GroupBy(g => g)
+            base._db.InsertGrouping(name, extensions.GroupBy(g => g)
                 .Select(ext => ext.Key.ToUpper().Replace(".", "")).ToList());
         }
     }

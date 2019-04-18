@@ -15,7 +15,7 @@ namespace FileSorterLib
     {
         protected Database _db { get; set; }
 
-        public DisposableDataLayerBase()
+        protected DisposableDataLayerBase()
         {
             this._db = new Database();
         }
@@ -26,19 +26,14 @@ namespace FileSorterLib
         }
 
         #region IDisposable Support
-        private bool disposedValue = false; // To detect redundant calls
 
         protected virtual void Dispose(bool disposing)
         {
-            if (!disposedValue)
-            {
                 if (disposing)
                 {
                     _db.Dispose();
                 }
 
-                disposedValue = true;
-            }
         }
 
 

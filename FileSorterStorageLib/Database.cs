@@ -14,7 +14,10 @@ namespace FileSorterStorageLib
 
         public Database()
         {
-            if (!System.IO.Directory.Exists(Common.StorageDirectory)) System.IO.Directory.CreateDirectory(Common.StorageDirectory);
+            if (!System.IO.Directory.Exists(Common.StorageDirectory))
+            {
+                System.IO.Directory.CreateDirectory(Common.StorageDirectory);
+            }
             _db = new LiteDatabase(Common.StoragePath);
         }
 
@@ -81,18 +84,12 @@ namespace FileSorterStorageLib
         }
 
         #region IDisposable Support
-        private bool disposedValue = false; // To detect redundant calls
 
         protected virtual void Dispose(bool disposing)
         {
-
-            if (!disposedValue)
+            if (disposing)
             {
-                if (disposing)
-                {
-                    _db.Dispose();
-                }
-                disposedValue = true;
+                _db.Dispose();
             }
         }
 

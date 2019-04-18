@@ -8,18 +8,18 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using MoreLinq;
+using System.Globalization;
+
 namespace FileSorterLib
 {
     public class FileMover : DisposableDataLayerBase
     {
-        private ConcurrentBag<FileData> _files { get; set; }
-
         public void MoveFiles(List<string> filePaths, string TargetRoot)
         {
-            var groupings = _db.GetGroupingConfig();
+            var groupings = base._db.GetGroupingConfig();
             filePaths.ForEach(file =>
             {
-                FileData fileObject = _db.GetFiles().Where(f => f.CurrentLocation.ToUpper() == file.ToUpper()).FirstOrDefault();
+                FileData fileObject = base._db.GetFiles().Where(f => f.CurrentLocation.ToUpperInvariant() == file.ToUpperInvariant()).FirstOrDefault();
                 if (fileObject != null)
                 {
                     FileInfo fileInfo = fileObject.GetInfo();
@@ -42,7 +42,7 @@ namespace FileSorterLib
                     }
                     string oldPath = fileObject.CurrentLocation;
                     string newPath = Path.Combine(newFolder, fileInfo.Name);
-                    if (!Directory.Exists(newFolder)) Directory.CreateDirectory(newFolder);
+                    if (!Directory.Exists(newFolder)) { Directory.CreateDirectory(newFolder); }
 
                     string newName = fileInfo.Name;
                     bool checkingName = true;
@@ -50,9 +50,10 @@ namespace FileSorterLib
 
                     while (checkingName)
                     {
+                        count++;
                         if (File.Exists(Path.Combine(Path.Combine(newFolder, newName))))
                         {
-                            newName = newName + "_" + (count + 1).ToString();
+                            newName = string.Format("{0}_{1}", newName, count);
                         }
                         else
                         {
@@ -69,7 +70,7 @@ namespace FileSorterLib
                         File.SetCreationTimeUtc(Path.Combine(newFolder, newName), File.GetCreationTimeUtc(fileInfo.FullName));
                         File.Delete(oldPath);
                         fileObject.AddMovement(newPath);
-                        _db.UpdateFile(fileObject);
+                        base._db.UpdateFile(fileObject);
                     }
                 }
             });

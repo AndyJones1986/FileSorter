@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TestApp
 {
-    class Program
+    static class Program
     {
         static void Main(string[] args)
         {
@@ -39,6 +39,7 @@ namespace TestApp
                         MoveFiles();
                         break;
                     case '0':
+                    default:
                         finish = true;
                         break;
                 }
